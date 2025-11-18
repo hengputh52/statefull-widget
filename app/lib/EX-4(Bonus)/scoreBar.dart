@@ -23,9 +23,10 @@ void main()
           color: Colors.amberAccent,
           child: Center(
             child: Container(
+              height: 300,
+              margin: EdgeInsets.all(10),
               
-              height: 250,
-              width: 350,
+              padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10)
@@ -53,19 +54,20 @@ class MyScore extends StatefulWidget{
 }
 
 class _MyScoreState extends State<MyScore> {
-  double progressBar = 0;
+  //double progressBar = 0;
   double minScore = 0;
   double maxScore =10;
-  double maxWidth = 300;
+  //double maxWidth = 300;
   
-  double counter() => maxWidth / 10;
+  //double counter() => maxWidth / 10;
 
   void increase()
   {
     setState(() {
       if(minScore == maxScore) return;
       minScore++;
-      progressBar = progressBar + counter();
+      //progressBar = progressBar + counter();
+      
       
     }); 
   }
@@ -76,7 +78,7 @@ class _MyScoreState extends State<MyScore> {
     setState(() {
       if(minScore == 0) return;
       minScore--;
-      progressBar = progressBar - counter();
+      //progressBar = progressBar - counter();
       
       
     });
@@ -97,9 +99,7 @@ class _MyScoreState extends State<MyScore> {
   Widget build(BuildContext context) {
     //final ScoreBar scoreBar;
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      
-      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text('My Score in Flutter',
         style: TextStyle(
@@ -128,22 +128,25 @@ class _MyScoreState extends State<MyScore> {
         Stack(
         children: [
         Container(
-          width: 300,
+          width: double.infinity,
           height: 50,
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey),
             borderRadius: BorderRadius.circular(10)
           )
         ),
-        Container(
+        FractionallySizedBox(
+          widthFactor: minScore / maxScore,
+          child: Container(
           height: 50,
-          width: progressBar,
           decoration: BoxDecoration(
             color: colorBar(),
           
             borderRadius: BorderRadius.circular(10)
           )
-        )
+        ),
+      )
+        
       ],
     )
     ],
