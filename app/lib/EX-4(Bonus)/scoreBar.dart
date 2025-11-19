@@ -21,19 +21,30 @@ void main()
           ),
         body: Container(
           color: Colors.amberAccent,
-          child: Center(
-            child: Container(
-              height: 300,
-              margin: EdgeInsets.all(10),
-              
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10)
+          height: double.infinity,
+            child: SingleChildScrollView(
+              child: 
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  MyScore(course: 'Flutter'),
+                  //SizedBox(height: 20),
+                  MyScore(course: 'Dart'),
+                  MyScore(course: 'Web development'),
+                  MyScore(course: 'Backend Development'),
+                  MyScore(course: 'C++',),
+                  MyScore(course: 'Pyhton',),
+                ],
+              )
               ),
-              child: MyScore(),
-            ),
-          )
+            
+            
+              
+              //padding: EdgeInsets.all(10),
+              
+              
+            
+          
           )
         ),
       )
@@ -46,8 +57,10 @@ class MyScore extends StatefulWidget{
 
   const MyScore({
     super.key,
+    required this.course
     
   });
+  final String course;
 
   @override
   State<MyScore> createState() => _MyScoreState();
@@ -98,58 +111,69 @@ class _MyScoreState extends State<MyScore> {
   @override
   Widget build(BuildContext context) {
     //final ScoreBar scoreBar;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('My Score in Flutter',
-        style: TextStyle(
-          fontSize: 25,
-          color: Colors.black,
-          fontWeight: FontWeight.bold
-          ),
+    return Container(
+      margin: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10)
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-    
-            IconButton(
-              onPressed: descrease,
-              icon: const Icon(CupertinoIcons.minus),
-              tooltip: 'descrease your score',
-            ),
-            IconButton(
-              onPressed: increase,
-              icon: const Icon(Icons.add),
-              tooltip: 'increase your score',
-            ),
-           ],
-        ),
-        Stack(
-        children: [
-        Container(
-          width: double.infinity,
-          height: 50,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(10)
-          )
-        ),
-        FractionallySizedBox(
-          widthFactor: minScore / maxScore,
-          child: Container(
-          height: 50,
-          decoration: BoxDecoration(
-            color: colorBar(),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
           
-            borderRadius: BorderRadius.circular(10)
-          )
-        ),
-      )
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('My Score in ${widget.course}',
+            style: TextStyle(
+              fontSize: 25,
+              color: Colors.black,
+              fontWeight: FontWeight.bold
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
         
-      ],
-    )
-    ],
+                IconButton(
+                  onPressed: descrease,
+                  icon: const Icon(CupertinoIcons.minus),
+                  tooltip: 'descrease your score',
+                ),
+                IconButton(
+                  onPressed: increase,
+                  icon: const Icon(Icons.add),
+                  tooltip: 'increase your score',
+                ),
+               ],
+            ),
+            Stack(
+            children: [
+            Container(
+              width: double.infinity,
+              height: 50,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(10)
+              )
+            ),
+            FractionallySizedBox(
+              widthFactor: minScore / maxScore,
+              child: Container(
+              height: 50,
+              decoration: BoxDecoration(
+                color: colorBar(),
+              
+                borderRadius: BorderRadius.circular(10)
+              )
+            ),
+          )
+            
+          ],
+        )
+        ],
+        ),
+      ),
     );
   }
 }
